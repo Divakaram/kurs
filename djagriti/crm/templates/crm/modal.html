@@ -1,0 +1,115 @@
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-11">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Записаться на занятие</h5>
+
+                        </div>
+                        <div class="col-1">
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                        </div>
+
+                    </div>
+
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                <form action="{% url 'home' %}" method="post">
+                    {% csrf_token %}
+                  <div class="row mb-3 justify-content-center mb-4">
+                    <div class="col-sm-10">
+                          {{form.order_name}}
+<!--                      <input type="text" class="form-control" id="InputName">-->
+                    </div>
+                  </div>
+
+                  <div class="row mb-3 justify-content-center mb-4">
+                    <div class="col-sm-10">
+                          {{form.order_phone}}
+<!--                      <input type="text" class="form-control" id="InputPhone">-->
+                    </div>
+                  </div>
+                    <div class="row mb-3 justify-content-center mb-4">
+                        <div class="col-sm-10">
+                          <div class="form-floating">
+                            {{form.order_napr}}
+                            <label for="id_order_napr">Выберите направление</label>
+<!--                      <input type="text" class="form-control" id="InputPhone">-->
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center mb-4">
+                        <div class="col-sm-10">
+                          <div class="form-floating">
+                            {{form.order_price}}
+                            <label for="id_order_price">Выберите абонемент</label>
+<!--                      <input type="text" class="form-control" id="InputPhone">-->
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center mb-4">
+                    <div class="col-sm-10">
+                          {{form.date}}
+                          <script>
+                              jQuery.datetimepicker.setLocale('ru');
+                            $(function () {
+                                $("#id_date").datetimepicker();
+                            });
+                        </script>
+                    </div>
+                  </div>
+
+<!--                  <fieldset>-->
+<!--                    <div class="row">-->
+<!--                      <legend class="col-form-label col-sm-2">Radio</legend>-->
+<!--                      <div class="col-sm-10 mt-2">-->
+<!--                        <div class="form-check">-->
+<!--                          <input type="radio" class="form-check-input" name="radios" id="radios1" value="option1" checked>-->
+<!--                          <label for="" class="form-check-label">Radio 1</label>-->
+<!--                        </div>-->
+<!--                        <div class="form-check">-->
+<!--                          <input type="radio" class="form-check-input" name="radios" id="radios2" value="option2">-->
+<!--                          <label for="" class="form-check-label">Radio 2</label>-->
+<!--                        </div>-->
+<!--                        <div class="form-check">-->
+<!--                          <input type="radio" class="form-check-input" name="radios" id="radios3" value="option3">-->
+<!--                          <label for="" class="form-check-label">Radio 3</label>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-form-label col-sm-2">Checkbox</div>-->
+<!--                      <div class="col-sm-10">-->
+<!--                        <div class="form-check mt-2">-->
+<!--                          <input type="checkbox" id="gridCheck" class="form-check-input">-->
+<!--                          <label for="gridCheck" class="form-check-label">Save password</label>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </fieldset>-->
+
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-5 ms-5">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                </div>
+                                <div class="col-5">
+                                    <button type="submit" class="btn btn-secondary">Записаться</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>

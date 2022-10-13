@@ -1,0 +1,85 @@
+{% extends 'crm/base.html' %}
+{% load static %}
+{% block content %}
+      <main>
+
+<!--          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">-->
+<!--            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">-->
+<!--                <div class="toast-header">-->
+<!--                    <img src="..." class="rounded me-2" alt="...">-->
+<!--                    <strong class="me-auto">Bootstrap</strong>-->
+<!--                    <small>11 мин назад</small>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>-->
+<!--                </div>-->
+<!--            <div class="toast-body">-->
+<!--            Привет, мир! Это тост-сообщение.-->
+<!--            </div>-->
+<!--            </div>-->
+<!--            </div>-->
+      <!--Корусель-->
+        <div class="container">
+          <div class="row align-items-center" style="margin-top: 15%">
+            <div class="col-4 text-center">
+              <h2>Йога. Медитация.</h2>
+              <h2>Здоровый образ жизни.</h2>
+              <p class="mt-5" style="font-size: 18px">Специальная цена на первое занятие <b>500 рублей</b></p>
+                 <button class="btn btn-outline-dark mt-5 btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 18px">Записаться на занятие</button>
+            </div>
+            <div class="col-8">
+              {% include 'crm/carousel.html' %}
+            </div>
+          </div>
+        </div>
+
+      <!--Корусель-->
+          {% block phone_error %}
+
+      {% endblock %}
+        <div class="container" style="margin-top: 10%">
+            <div class="row my-5">
+                <div class="col-md-5 col-sm-12">
+                  <img class="w-100" src="{% static 'crm/img/about.webp' %}" alt="">
+                </div>
+                <div class="col-md-7 text-center col-sm-12">
+                  <h2 class="my-3">О нас</h2>
+                  <p style="font-size: 18px">
+                    Светлое лофт-пространство, внимание к деталям и профессиональная команда создают домашний уют и настраивают на качественную практику.
+Мы всегда рады неформальному общению до и после класса и приглашаем задать вопросы преподавателям и администраторам или поделиться впечатлениями с другими гостями за чашкой ароматного травяного чая. Djagriti – это место, где вы можете надежно укрыться от городской суеты и восстановить жизненную энергию.
+                  </p>
+                </div>
+            </div>
+            <h2 class="text-center my-5">Направления студии</h2>
+            <div class="row gy-5">
+              <div class="col-md-4 col-sm-6 text-center">
+                <h4 class="my-3">ХАТХА-ЙОГА</h4>
+                <img src="https://thumb.tildacdn.com/tild3137-6462-4565-b434-333338336639/-/resize/400x400/-/format/webp/01-.jpg" class="w-75 my-3">
+                <p>Основа современной йоги. Служит начальной ступенью для познания своих возможностей.</p>
+              </div>
+              <div class="col-md-4 col-sm-6 text-center">
+                <h4 class="my-3">АЙЕНГАРА ЙОГА</h4>
+                  <img src="https://thumb.tildacdn.com/tild6639-3334-4331-b535-393263343563/-/resize/400x400/-/format/webp/02-.jpg" class="w-75 my-3">
+                <p>Стиль хатха-йоги, основанный на физическом выравнивании тела в позах.</p>
+              </div>
+              <div class="col-md-4 col-sm-6 text-center">
+                <h4 class="my-3">ЙОГА В ГАМАКАХ</h4>
+                <img src="https://thumb.tildacdn.com/tild3363-6336-4136-b466-623833333835/-/resize/400x400/-/format/webp/03---.jpg" class="w-75 my-3">
+                <p>Практика, которая даёт силу мышцам и ощущение расслабленности всего тела.</p>
+              </div>
+              <div class="col-md-4 col-sm-6 text-center">
+                <h4 class="my-3">НИДРА-ЙОГА</h4>
+                   <img src="https://thumb.tildacdn.com/tild3932-6538-4562-a239-353765323737/-/resize/300x300/-/format/webp/04-.jpg" class="w-75 my-3">
+                <p>Йога нидра - это техника осознанного расслабления, иначе именуемая как йога сна.</p>
+              </div>
+              <div class="col-md-4 col-sm-6 text-center">
+                <h4 class="my-3">ДЫХАНИЕ И МЕДИИТАЦИИ</h4>
+                 <img src="https://thumb.tildacdn.com/tild3462-3830-4336-b763-333130316339/-/resize/400x400/-/format/webp/05---.jpg" class="w-75 my-3">
+                <p>Работа со своим внутренним «Я». Упор на сознание человека.</p>
+              </div>
+              <div class="col-md-4 col-sm-6 text-center">
+                <h4 class="my-3">ДЕТСКАЯ ЙОГА</h4>
+                <img src="https://thumb.tildacdn.com/tild3364-3339-4439-a463-336138386532/-/resize/400x400/-/format/webp/_.jpg" class="w-75 my-3">
+                <p>Комплекс упражнений из хатха-йоги с тематическими и динамичными играми.</p>
+              </div>
+            </div>
+        </div>
+{% endblock %}

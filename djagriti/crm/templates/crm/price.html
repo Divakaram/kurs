@@ -1,0 +1,57 @@
+{% extends 'crm/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="container-fluid" style="margin-top: 11%; margin-bottom: 10%">
+    <div class="container p-5">
+      <div class="row">
+        {% for p in price_site %}
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card h-100 shadow-lg">
+            <div class="card-body">
+              <div class="text-center p-3">
+                <h5 class="card-title">{{ p.price_name }}</h5>
+                <br><br>
+                <span class="h2">{{ p.price_value }} ₽</span>
+                <br><br>
+              </div>
+            </div>
+            <div class="card-body text-center">
+              <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius:30px">Купить</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+<!--        <div class="col-lg-4 col-md-12 mb-4">-->
+<!--          <div class="card h-100 shadow-lg">-->
+<!--            <div class="card-body">-->
+<!--              <div class="text-center p-3">-->
+<!--                <h5 class="card-title">Абонемент на месяц</h5>-->
+<!--                <br><br>-->
+<!--                <span class="h2">4500 ₽</span>-->
+<!--                <br><br>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="card-body text-center">-->
+<!--              <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius:30px">Купить</button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-12 mb-4">-->
+<!--          <div class="card h-100 shadow-lg">-->
+<!--            <div class="card-body">-->
+<!--              <div class="text-center p-3">-->
+<!--                <h5 class="card-title">Абонемент на год</h5>-->
+<!--                <br><br>-->
+<!--                <span class="h2">24 000 ₽</span>-->
+<!--                <br><br>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="card-body text-center">-->
+<!--              <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius:30px">Купить</button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'crm/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+<div class="row mx-auto" style="margin-top: 6rem; margin-bottom: 5rem">
+    <div class="col">
+        <h1 class="text-center">Преподаватели</h1>
+    </div>
+</div>
+</div>
+        <div class="container">
+            <div class="row gy-5 justify-content-center ms-5">
+                {% for p in posts %}
+              <div class="col-md-6 col-lg-4 text-center">
+               <div class="card" style="width: 18rem;  height: 33rem">
+                   <img src="{{ p.photo.url }}" class="card-img-top" alt="...">
+                   <div class="card-body">
+                        <h5 class="card-title">{{ p.name }}</h5>
+                        <p class="card-text">Направление: {{ p.napr }}</p>
+                        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
+                    </div>
+               </div>
+              </div>
+                {% endfor %}
+<!--              <div class="col-md-4 col-sm-6 text-center">-->
+<!--                <div class="card" style="width: 18rem; height: 33rem">-->
+<!--                   <img src="{% static 'crm/img/teacher_2.jpg' %}" class="card-img-top" alt="...">-->
+<!--                   <div class="card-body">-->
+<!--                        <h5 class="card-title">Ольга Максимова</h5>-->
+<!--                        <p class="card-text">Направления: Хатха, Йога Нидра</p>-->
+<!--                        <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                    </div>-->
+<!--              </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 text-center">-->
+<!--                  <div class="card" style="width: 18rem; height: 33rem">-->
+<!--                    <img src="{% static 'crm/img/teacher_3.jpg' %}" class="card-img-top" alt="...">-->
+<!--                   <div class="card-body">-->
+<!--                        <h5 class="card-title">Рената Швец</h5>-->
+<!--                        <p class="card-text">Направления: Хатха, Детская йога</p>-->
+<!--                        <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                    </div>-->
+<!--              </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 text-center">-->
+<!--                  <div class="card" style="width: 18rem;  height: 33rem">-->
+<!--                    <img src="{% static 'crm/img/teacher_4.jpg' %}" class="card-img-top" alt="...">-->
+<!--                   <div class="card-body">-->
+<!--                        <h5 class="card-title">Дмитриева Елена</h5>-->
+<!--                        <p class="card-text">Направления: Йога в гамаках</p>-->
+<!--                        <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 text-center">-->
+<!--                  <div class="card" style="width: 18rem; height: 33rem">-->
+<!--                    <img src="{% static 'crm/img/teacher_5.jpg' %}" class="card-img-top" alt="...">-->
+<!--                   <div class="card-body">-->
+<!--                        <h5 class="card-title">Владимир Акулов</h5>-->
+<!--                        <p class="card-text">Направления: Дыхание и медитации</p>-->
+<!--                        <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 text-center">-->
+<!--                  <div class="card" style="width: 18rem;  height: 33rem">-->
+<!--                    <img src="{% static 'crm/img/teacher_6.jpg' %}" class="card-img-top" alt="...">-->
+<!--                   <div class="card-body">-->
+<!--                        <h5 class="card-title">Анастасия Поддубная</h5>-->
+<!--                        <p class="card-text">Направления: Йога в гамаках</p>-->
+<!--                        <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+            </div>
+        </div>
+{% endblock %}
