@@ -1,10 +1,10 @@
 import requests
 from telebot.models import TeleSettings
-
+from djagriti.settings import TG_TOKEN
 
 def sendTelegram(tg_name, tg_phone):
     settings = TeleSettings.objects.get(pk=1)
-    token = str(settings.tg_token)
+    token = TG_TOKEN
     chat_id = str(settings.tg_chat)
     text = str(settings.tg_message)
     api = 'https://api.telegram.org/bot'
