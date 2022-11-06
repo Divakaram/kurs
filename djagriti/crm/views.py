@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from cms.models import *
 from crm.forms import *
 from crm.models import Price as PriceView
-from telebot.sendmessage import sendTelegram
+from telegram import *
 
 
 def index(request):
@@ -14,7 +14,7 @@ def index(request):
         name = request.POST['order_name']
         phone = request.POST['order_phone']
         if form.is_valid():
-            sendTelegram(tg_name=name, tg_phone=phone)
+            send_message(tg_name=name, tg_phone=phone)
             form.save()
             return render(request, 'crm/thanks_page.html', {'slider_list': slider_list, 'form': form, 'name': name})
         else:
@@ -36,7 +36,27 @@ def price(request):
     return render(request, 'crm/price.html', {'price_site': price_site, 'form': form, 'title': 'Цены'})
 
 
+def dashboard(request):
+    order = Order.objects.all()
+    return render(request, 'crm/dashboard.html', {'order': order})
+
+
 def show_post(request, post_slug):
     form = OrderForm()
     post = get_object_or_404(CmsTeachers, slug=post_slug)
     return render(request, 'crm/teacher_about.html', {'post': post, 'form': form, 'title': 'О тренерах'})
+
+
+def delete_order(request, id_order):
+    order = Order.objects.get(pk=id_order)
+    order.delete()
+    return redirect('dashboard')
+
+
+def update_order(request, id_order):
+    order = Order.objects.get(pk=id_order)
+    form = OrderForm(request.POST or None, instance=order)
+    if form.is_valid():
+        form.save()
+        return redirect('dashboard')
+    return render(request, 'crm/update_order.html', {'order': order, 'form': form})

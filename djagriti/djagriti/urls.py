@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path
 
+from crm import views
 from crm.views import *
 from djagriti import settings
 
@@ -25,7 +27,10 @@ urlpatterns = [
     path('', index, name='home'),
     path('prepodavateli/', teachers, name='teachers'),
     path('prepodaveteli/<slug:post_slug>/', show_post, name='post'),
-    path('price/', price, name='price')
+    path('price/', price, name='price'),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('delete_order/<id_order>', delete_order, name='delete_order'),
+    path('update_order/<id_order>', update_order, name='update_order'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

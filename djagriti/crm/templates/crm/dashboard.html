@@ -1,0 +1,35 @@
+{% extends 'crm/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container pt-5">
+    <div class="row mt-5">
+        <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col">Направление</th>
+                    <th scope="col">Абонемент</th>
+                    <th scope="col">Дата и время</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in order%}
+            <tr>
+                <td>{{i.order_name}}</td>
+                <td>{{i.order_phone}}</td>
+                <td>{{i.order_napr}}</td>
+                <td>{{i.order_price}}</td>
+                <td>{{i.date|date:'d.m.Y H:i'}}</td>
+                <td><a class="btn btn-success" href="{% url 'update_order' i.id %}">Изменить</a></td>
+                <td><a class="btn btn-danger" href="{% url 'delete_order' i.id %}">Удалить</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
