@@ -38,7 +38,7 @@ def price(request):
 
 def dashboard(request):
     order = Order.objects.all()
-    return render(request, 'crm/dashboard.html', {'order': order})
+    return render(request, 'crm/dashboard.html', {'order': order, 'title': "Панель управления"})
 
 
 def show_post(request, post_slug):
@@ -60,3 +60,7 @@ def update_order(request, id_order):
         form.save()
         return redirect('dashboard')
     return render(request, 'crm/update_order.html', {'order': order, 'form': form})
+
+
+def show_login(request):
+    return render(request, 'crm/login.html')

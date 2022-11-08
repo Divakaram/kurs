@@ -31,6 +31,7 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('delete_order/<id_order>', delete_order, name='delete_order'),
     path('update_order/<id_order>', update_order, name='update_order'),
+    path('login/', show_login, name='login'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
