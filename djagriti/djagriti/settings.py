@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crm.apps.CrmConfig',
     'cms.apps.CmsConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,5 @@ DATETIME_INPUT_FORMATS = [
 ]
 
 TG_TOKEN = os.getenv('TG_TOKEN')
+
+LOGIN_REDIRECT_URL = 'dashboard'

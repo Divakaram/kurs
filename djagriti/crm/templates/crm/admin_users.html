@@ -1,0 +1,29 @@
+{% extends 'crm/admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container pt-5">
+    <div class="row mt-5">
+        <div class="col">
+        <a href="{% url 'add_user' %}" class="btn btn-success">Добавить</a>
+        <table class="table" style="width: 200px">
+            <thead>
+                <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Пароль</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in users%}
+            <tr>
+                <td>{{i.username}}</td>
+                <td>{{i.password}}</td>
+                <td><a class="btn btn-danger" href="{% url 'delete_user' i.username %}">Удалить</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

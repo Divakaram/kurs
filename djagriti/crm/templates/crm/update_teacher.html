@@ -2,38 +2,32 @@
 {% load static %}
 {% block content %}
 <div class="container pt-5">
-<form action="{% url 'update_order' order.id %}"  method="post">
+<form action="{% url 'update_teacher' teacher.id %}" enctype="multipart/form-data" method="post">
         {% csrf_token %}
       <div class="row mb-3 mt-5 justify-content-center mb-4">
         <div class="col-sm-10">
-              {{form.order_name}}
+              {{form.photo}}
         </div>
       </div>
 
       <div class="row mb-3 justify-content-center mb-4">
         <div class="col-sm-10">
-              {{form.order_phone}}
+              {{form.name}}
         </div>
       </div>
         <div class="row mb-3 justify-content-center mb-4">
             <div class="col-sm-10">
-                {{form.order_napr}}
+                {{form.slug}}
             </div>
         </div>
         <div class="row mb-3 justify-content-center mb-4">
             <div class="col-sm-10">
-                {{form.order_price}}
+                {{form.napr}}
             </div>
         </div>
         <div class="row mb-3 justify-content-center mb-4">
         <div class="col-sm-10">
-              {{form.date}}
-              <script>
-                  jQuery.datetimepicker.setLocale('ru');
-                $(function () {
-                    $("#id_date").datetimepicker();
-                });
-            </script>
+              {{form.description}}
         </div>
       </div>
     <div class="row mb-3 justify-content-center mb-4">

@@ -1,6 +1,6 @@
 import phonenumbers
 from django import forms
-
+from django.contrib.auth.models import User
 from crm.models import *
 
 
@@ -13,7 +13,9 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = ['order_name', 'order_phone', 'order_napr', 'order_price', 'date']
         widgets = {
-            'order_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя', 'pattern': '^[А-Яа-яЁё\s]+$', "title": "Только кириллические символы"}),
+            'order_name': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Имя', 'pattern': '^[А-Яа-яЁё\s]+$',
+                       "title": "Только кириллические символы"}),
             'order_phone': forms.TextInput(
                 attrs={'type': 'tel', 'class': 'form-control', 'placeholder': 'Номер телефона'}),
             'order_napr': forms.Select(attrs={'class': 'form-select'}),
@@ -27,3 +29,23 @@ class OrderForm(forms.ModelForm):
         if not phonenumbers.is_valid_number(z):
             raise forms.ValidationError("Такого номера телефона не существует")
         return phone_number
+
+
+class PriceForm(forms.ModelForm):
+    class Meta:
+        model = Price
+        fields = ['price_name', 'price_value']
+        widgets = {
+            'price_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'price_value': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'})
+        }

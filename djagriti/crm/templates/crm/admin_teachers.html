@@ -1,0 +1,35 @@
+{% extends 'crm/admin_base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container pt-5">
+    <div class="row mt-5">
+        <div class="col">
+        <a href="{% url 'add_teacher' %}" class="btn btn-success">Добавить</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Фото</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Слаг</th>
+                    <th scope="col">Направление</th>
+                    <th scope="col">Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in order%}
+            <tr>
+                <td><img width="200px" src="{{i.photo.url}}"></td>
+                <td>{{i.name}}</td>
+                <td>{{i.slug}}</td>
+                <td>{{i.napr}}</td>
+                <td>{{i.description}}</td>
+                <td><a class="btn btn-success" href="{% url 'update_teacher' i.id %}">Изменить</a></td>
+                <td><a class="btn btn-danger" href="{% url 'delete_teacher' i.id %}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
