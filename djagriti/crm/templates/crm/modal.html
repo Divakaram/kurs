@@ -1,5 +1,4 @@
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -58,7 +57,13 @@
                           <script>
                               jQuery.datetimepicker.setLocale('ru');
                             $(function () {
-                                $("#id_date").datetimepicker();
+                                $("#id_date").datetimepicker({
+                                    formatDate:'Y/m/d',
+                                    minDate:'0',
+                                    maxDate:'+1970/01/07',
+                                    allowTimes:['10:00', '11:00','12:00', '13:00', '15:00',  '17:00', '17:00', '17:20', '19:00']
+                                });
+
                             });
                         </script>
                     </div>

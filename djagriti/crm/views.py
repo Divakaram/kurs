@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -6,8 +7,16 @@ from cms.models import *
 from cms.forms import *
 from crm.forms import *
 from crm.models import Price as PriceView
+from django.views.generic import ListView
 from telegram import *
 from django.contrib.auth.models import User
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+from django.http import HttpResponse
+from datetime import datetime
+from datetime import timedelta
+from openpyxl.styles import Font
+from django.db.models import Count
 
 
 def index(request):
@@ -127,8 +136,6 @@ def delete_user(request, user_name):
     return redirect('show_users')
 
 
-
-
 @login_required
 def add_user(request):
     form = UserForm(request.POST or None)
@@ -153,3 +160,86 @@ def admin_price(request):
 def show_users(request):
     users = User.objects.all()
     return render(request, 'crm/admin_users.html', {'users': users, 'title': "Панель управления"})
+
+
+def export_to_xlsx(request):
+    order = Order.objects.filter(date__month=datetime.now().month)
+    count = order.count()
+    popular_napr = Order.objects.filter(date__month=datetime.now().month).values('order_napr__napr_name').annotate(total=Count("order_napr")).order_by("-total")[:1]
+    popular_napr_value = popular_napr[0]
+    p = popular_napr_value['order_napr__napr_name']
+    popular_price = Order.objects.filter(date__month=datetime.now().month).values('order_price__price_name').annotate(total=Count("order_price")).order_by("-total")[:1]
+    popular_price_value = popular_price[0]
+    p_price = popular_price_value['order_price__price_name']
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+    response['Content-Disposition'] = 'attachment; filename="Otchet".xlsx'.format()
+    workbook = Workbook()
+    worksheet = workbook.active
+    worksheet.title = 'Отчёт'
+    columns = [
+        'Имя',
+        'Телефон',
+        'Направление',
+        'Абонемент',
+        'Дата',
+    ]
+    row_num = 1
+    for col_num, column_title in enumerate(columns, 1):
+        cell = worksheet.cell(row=row_num, column=col_num)
+        cell.value = column_title
+
+    for ord in order:
+        row_num += 1
+        row = [
+            ord.order_name,
+            ord.order_phone,
+            ord.order_napr.napr_name,
+            ord.order_price.price_name,
+            ord.date,
+        ]
+
+        for col_num, cell_value in enumerate(row, 1):
+            cell = worksheet.cell(row=row_num, column=col_num)
+            cell.value = cell_value
+
+    cell_count_name = worksheet.cell(row=1, column=7)
+    cell_count_name.value = "Количество заявок за месяц"
+    cell_count_name.font = Font(name='Calibri', bold=True, size=14)
+    column_letter = get_column_letter(7)
+    column_dimensions = worksheet.column_dimensions[column_letter]
+    column_dimensions.width = 35
+    column_letter = get_column_letter(8)
+    column_dimensions = worksheet.column_dimensions[column_letter]
+    column_dimensions.width = 21
+
+    cell_count_value = worksheet.cell(row=1, column=8)
+    cell_count_value.value = count
+    cell_count_value.font = Font(size=14)
+
+
+    cell_count_name = worksheet.cell(row=2, column=7)
+    cell_count_name.value = "Популярное направление"
+    cell_count_name.font = Font(name='Calibri', bold=True, size=14)
+
+    cell_count_value = worksheet.cell(row=2, column=8)
+    cell_count_value.value = p
+    cell_count_value.font = Font(size=14)
+
+    cell_count_name = worksheet.cell(row=3, column=7)
+    cell_count_name.value = "Популярный абонемент"
+    cell_count_name.font = Font(name='Calibri', bold=True, size=14)
+
+    cell_count_value = worksheet.cell(row=3, column=8)
+    cell_count_value.value = p_price
+    cell_count_value.font = Font(size=14)
+
+
+    for i in range(2, len(columns) + 1):
+        column_letter = get_column_letter(i)
+        column_dimensions = worksheet.column_dimensions[column_letter]
+        column_dimensions.width = 20
+
+    workbook.save(response)
+    return response

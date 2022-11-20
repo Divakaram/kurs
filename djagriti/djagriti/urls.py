@@ -44,7 +44,8 @@ urlpatterns = [
     path('admin-price/', admin_price, name='admin_price'),
     path('accounts/', include('users.urls', namespace='users')),
     path('accounts/', include(urls)),
-    path('admin-users/', show_users, name="show_users")
+    path('admin-users/', show_users, name="show_users"),
+    path('excel/', export_to_xlsx, name="excel"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

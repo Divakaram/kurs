@@ -11,7 +11,9 @@
                     <th scope="col">Телефон</th>
                     <th scope="col">Направление</th>
                     <th scope="col">Абонемент</th>
-                    <th scope="col">Дата и время</th>
+                    <th scope="col">Дата и время выполнения</th>
+                    <th scope="col">Дата и время заявки</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +24,7 @@
                 <td>{{i.order_napr}}</td>
                 <td>{{i.order_price}}</td>
                 <td>{{i.date|date:'d.m.Y H:i'}}</td>
+                <td>{{i.order_dt|date:'d.m.Y H:i'}}</td>
                 <td><a class="btn btn-success" href="{% url 'update_order' i.id %}">Изменить</a></td>
                 <td><a class="btn btn-danger" href="{% url 'delete_order' i.id %}">Удалить</a></td>
 
