@@ -1,0 +1,30 @@
+{% extends 'crm/admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container pt-5">
+<form action="{% url 'add_napr' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+      <div class="row mb-3 mt-5 justify-content-center mb-4">
+        <div class="col-sm-10">
+              {{form.napr_name}}
+        </div>
+      </div>
+
+      <div class="row mb-3 justify-content-center mb-4">
+        <div class="col-sm-10">
+              {{form.description}}
+        </div>
+      </div>
+        <div class="row mb-3 justify-content-center mb-4">
+            <div class="col-sm-10">
+                {{form.image}}
+            </div>
+        </div>
+    <div class="row mb-3 justify-content-center mb-4">
+        <div class="col-sm-10">
+              <input type="submit" value="Добавить" class="btn btn-success">
+        </div>
+      </div>
+    </form>
+    </div>
+{% endblock %}

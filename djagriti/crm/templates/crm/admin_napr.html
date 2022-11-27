@@ -1,0 +1,32 @@
+{% extends 'crm/admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container pt-5">
+    <div class="row mt-5">
+        <div class="col">
+         <a href="{% url 'add_napr' %}" class="btn btn-success">Добавить</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Фото</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in napr %}
+            <tr>
+                <td>{{i.napr_name}}</td>
+                <td>{{i.description}}</td>
+                <td><img src="{{i.image.url}}" class="w-50"></td>
+                <td><a class="btn btn-success" href="{% url 'update_napr' i.id %}">Изменить</a></td>
+                <td><a class="btn btn-danger" href="{% url 'delete_napr' i.id %}">Удалить</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

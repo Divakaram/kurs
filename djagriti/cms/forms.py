@@ -8,8 +8,8 @@ class TeacherForm(forms.ModelForm):
         fields = {"photo", "name", "slug", "napr", "description"}
         widgets = {
             "photo": forms.FileInput(attrs={"class": "form-control"}),
-            "name": forms.TextInput(attrs={"class": "form-control"}),
-            "slug": forms.TextInput(attrs={"class": "form-control"}),
+            "name": forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Имя'}),
+            "slug": forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Слаг'}),
             "napr": forms.Select(attrs={"class": "form-select"}),
-            "description": forms.Textarea(attrs={"class": "form-control"})
+            "description": forms.Textarea(attrs={"class": "form-control", 'placeholder': 'Описание'})
         }

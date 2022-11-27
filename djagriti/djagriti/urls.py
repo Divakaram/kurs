@@ -18,8 +18,6 @@ from django.contrib import admin
 from django.contrib.auth import urls
 from django.template.defaulttags import url
 from django.urls import path, include
-
-from crm import views
 from crm.views import *
 from djagriti import settings
 
@@ -38,6 +36,9 @@ urlpatterns = [
     path('delete_price/<id_price>', delete_price, name='delete_price'),
     path('update_price/<id_price>', update_price, name='update_price'),
     path('add_price/', add_price, name='add_price'),
+    path('delete_napr/<id_napr>', delete_napr, name='delete_napr'),
+    path('update_napr/<id_napr>', update_napr, name='update_napr'),
+    path('add_napr/', add_napr, name='add_napr'),
     path('delete_user/<user_name>', delete_user, name='delete_user'),
     path('add_user/', add_user, name='add_user'),
     path('admin-teach/', admin_teachers, name='admin_teachers'),
@@ -45,6 +46,7 @@ urlpatterns = [
     path('accounts/', include('users.urls', namespace='users')),
     path('accounts/', include(urls)),
     path('admin-users/', show_users, name="show_users"),
+    path('admin-napr/', admin_napr, name="admin_napr"),
     path('excel/', export_to_xlsx, name="excel"),
 ]
 if settings.DEBUG:

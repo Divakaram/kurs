@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from crm.models import NaprCrm
 
+
 # Create your models here.
 class CmsSlider(models.Model):
     cms_img = models.ImageField(upload_to='sliderimg/')

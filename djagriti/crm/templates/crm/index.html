@@ -50,36 +50,13 @@
             </div>
             <h2 class="text-center my-5">Направления студии</h2>
             <div class="row gy-5">
+                {% for n in napr %}
               <div class="col-md-4 col-sm-6 text-center">
-                <h4 class="my-3">ХАТХА-ЙОГА</h4>
-                <img src="https://thumb.tildacdn.com/tild3137-6462-4565-b434-333338336639/-/resize/400x400/-/format/webp/01-.jpg" class="w-75 my-3">
-                <p>Основа современной йоги. Служит начальной ступенью для познания своих возможностей.</p>
+                <h4 class="my-3">{{ n.napr_name }}</h4>
+                <img src="{{ n.image.url }}" class="w-75 my-3">
+                <p>{{ n.description }}</p>
               </div>
-              <div class="col-md-4 col-sm-6 text-center">
-                <h4 class="my-3">АЙЕНГАРА ЙОГА</h4>
-                  <img src="https://thumb.tildacdn.com/tild6639-3334-4331-b535-393263343563/-/resize/400x400/-/format/webp/02-.jpg" class="w-75 my-3">
-                <p>Стиль хатха-йоги, основанный на физическом выравнивании тела в позах.</p>
-              </div>
-              <div class="col-md-4 col-sm-6 text-center">
-                <h4 class="my-3">ЙОГА В ГАМАКАХ</h4>
-                <img src="https://thumb.tildacdn.com/tild3363-6336-4136-b466-623833333835/-/resize/400x400/-/format/webp/03---.jpg" class="w-75 my-3">
-                <p>Практика, которая даёт силу мышцам и ощущение расслабленности всего тела.</p>
-              </div>
-              <div class="col-md-4 col-sm-6 text-center">
-                <h4 class="my-3">НИДРА-ЙОГА</h4>
-                   <img src="https://thumb.tildacdn.com/tild3932-6538-4562-a239-353765323737/-/resize/300x300/-/format/webp/04-.jpg" class="w-75 my-3">
-                <p>Йога нидра - это техника осознанного расслабления, иначе именуемая как йога сна.</p>
-              </div>
-              <div class="col-md-4 col-sm-6 text-center">
-                <h4 class="my-3">ДЫХАНИЕ И МЕДИИТАЦИИ</h4>
-                 <img src="https://thumb.tildacdn.com/tild3462-3830-4336-b763-333130316339/-/resize/400x400/-/format/webp/05---.jpg" class="w-75 my-3">
-                <p>Работа со своим внутренним «Я». Упор на сознание человека.</p>
-              </div>
-              <div class="col-md-4 col-sm-6 text-center">
-                <h4 class="my-3">ДЕТСКАЯ ЙОГА</h4>
-                <img src="https://thumb.tildacdn.com/tild3364-3339-4439-a463-336138386532/-/resize/400x400/-/format/webp/_.jpg" class="w-75 my-3">
-                <p>Комплекс упражнений из хатха-йоги с тематическими и динамичными играми.</p>
-              </div>
+                {% endfor %}
             </div>
         </div>
 {% endblock %}

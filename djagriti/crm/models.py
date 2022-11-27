@@ -1,8 +1,11 @@
 from django.db import models
 
+
 # Create your models here.
 class NaprCrm(models.Model):
     napr_name = models.CharField(max_length=100, verbose_name='Направление')
+    description = models.TextField(verbose_name="Описание", null=True)
+    image = models.ImageField(upload_to="napr/", null=True)
 
     def __str__(self):
         return self.napr_name
@@ -27,10 +30,10 @@ class Price(models.Model):
 
 class Order(models.Model):
     order_dt = models.DateTimeField(auto_now=True)
-    order_name = models.CharField(max_length=100, verbose_name='Имя')
+    order_name = models.CharField(max_length=30, verbose_name='Имя')
     order_phone = models.CharField(max_length=18, verbose_name='Телефон')
     order_napr = models.ForeignKey(NaprCrm, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Направление')
-    order_price = models.ForeignKey(Price, on_delete=models.PROTECT,  null=True, blank=True, verbose_name="Абонемент")
+    order_price = models.ForeignKey(Price, on_delete=models.PROTECT, null=True, blank=True, verbose_name="Абонемент")
     date = models.DateTimeField(verbose_name="Дата и время")
 
     def __str__(self):

@@ -36,8 +36,19 @@ class PriceForm(forms.ModelForm):
         model = Price
         fields = ['price_name', 'price_value']
         widgets = {
-            'price_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'price_value': forms.TextInput(attrs={'class': 'form-control'}),
+            'price_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название'}),
+            'price_value': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Стоимость'}),
+        }
+
+
+class NaprForm(forms.ModelForm):
+    class Meta:
+        model = NaprCrm
+        fields = "__all__"
+        widgets = {
+            'napr_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Описание'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'})
         }
 
 
@@ -46,6 +57,6 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['username', 'password']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'})
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Логин'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'})
         }

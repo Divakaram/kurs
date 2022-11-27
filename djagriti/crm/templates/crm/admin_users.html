@@ -9,14 +9,12 @@
             <thead>
                 <tr>
                     <th scope="col">Имя</th>
-                    <th scope="col">Пароль</th>
                 </tr>
             </thead>
             <tbody>
             {% for i in users%}
             <tr>
                 <td>{{i.username}}</td>
-                <td>{{i.password}}</td>
                 <td><a class="btn btn-danger" href="{% url 'delete_user' i.username %}">Удалить</a></td>
 
             </tr>

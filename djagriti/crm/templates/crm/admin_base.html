@@ -35,6 +35,9 @@
               <li class="nav-item me-4">
                 <a class="nav-link" href="{% url 'admin_price' %}">Цены</a>
               </li>
+                <li class="nav-item me-4">
+                <a class="nav-link" href="{% url 'admin_napr' %}">Направления</a>
+              </li>
                 {% if user.get_username == "root" %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'show_users' %}">Администраторы</a>

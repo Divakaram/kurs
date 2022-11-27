@@ -8,7 +8,7 @@ from cms.forms import *
 from crm.forms import *
 from crm.models import Price as PriceView
 from django.views.generic import ListView
-from telegram import *
+from crm.telegram import *
 from django.contrib.auth.models import User
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
@@ -21,6 +21,7 @@ from django.db.models import Count
 
 def index(request):
     slider_list = CmsSlider.objects.all()
+    napr = NaprCrm.objects.all()
     if request.method == 'POST':
         form = OrderForm(request.POST)
         name = request.POST['order_name']
@@ -28,12 +29,13 @@ def index(request):
         if form.is_valid():
             send_message(tg_name=name, tg_phone=phone)
             form.save()
-            return render(request, 'crm/thanks_page.html', {'slider_list': slider_list, 'form': form, 'name': name})
+            return render(request, 'crm/thanks_page.html', {'slider_list': slider_list,'napr': napr, 'form': form, 'name': name})
         else:
-            return render(request, 'crm/phone_error.html', {'slider_list': slider_list, 'form': form})
+            return render(request, 'crm/phone_error.html', {'slider_list': slider_list,'napr': napr, 'form': form})
     else:
         form = OrderForm()
-    return render(request, 'crm/index.html', {'slider_list': slider_list, 'form': form, 'title': 'Главная'})
+    return render(request, 'crm/index.html',
+                  {'slider_list': slider_list, 'form': form, 'napr': napr, 'title': 'Главная'})
 
 
 def teachers(requst):
@@ -157,24 +159,59 @@ def admin_price(request):
     return render(request, 'crm/admin_price.html', {'order': price, 'title': "Панель управления"})
 
 
+@login_required
 def show_users(request):
     users = User.objects.all()
     return render(request, 'crm/admin_users.html', {'users': users, 'title': "Панель управления"})
 
 
+@login_required
+def admin_napr(request):
+    napr = NaprCrm.objects.all()
+    return render(request, 'crm/admin_napr.html', {'napr': napr, 'title': "Панель управления"})
+
+
+@login_required
+def delete_napr(request, id_napr):
+    napr = NaprCrm.objects.get(pk=id_napr)
+    napr.delete()
+    return redirect('admin_napr')
+
+
+@login_required
+def update_napr(request, id_napr):
+    napr = NaprCrm.objects.get(pk=id_napr)
+    form = NaprForm(request.POST or None, request.FILES or None, instance=napr)
+    if form.is_valid():
+        form.save()
+        return redirect('admin_napr')
+    return render(request, 'crm/update_napr.html', {'napr': napr, 'form': form})
+
+
+@login_required
+def add_napr(request):
+    form = NaprForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        return redirect('admin_napr')
+    return render(request, 'crm/add_napr.html', {'form': form})
+
+
 def export_to_xlsx(request):
     order = Order.objects.filter(date__month=datetime.now().month)
     count = order.count()
-    popular_napr = Order.objects.filter(date__month=datetime.now().month).values('order_napr__napr_name').annotate(total=Count("order_napr")).order_by("-total")[:1]
+    popular_napr = Order.objects.filter(date__month=datetime.now().month).values('order_napr__napr_name').annotate(
+        total=Count("order_napr")).order_by("-total")[:1]
     popular_napr_value = popular_napr[0]
     p = popular_napr_value['order_napr__napr_name']
-    popular_price = Order.objects.filter(date__month=datetime.now().month).values('order_price__price_name').annotate(total=Count("order_price")).order_by("-total")[:1]
+    popular_price = Order.objects.filter(date__month=datetime.now().month).values('order_price__price_name').annotate(
+        total=Count("order_price")).order_by("-total")[:1]
     popular_price_value = popular_price[0]
     p_price = popular_price_value['order_price__price_name']
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
-    response['Content-Disposition'] = 'attachment; filename="Otchet".xlsx'.format()
+    response['Content-Disposition'] = 'attachment; filename={date}_otchet.xlsx'.format(date=datetime.now().strftime('%Y-%m-%d'))
     workbook = Workbook()
     worksheet = workbook.active
     worksheet.title = 'Отчёт'
@@ -218,7 +255,6 @@ def export_to_xlsx(request):
     cell_count_value.value = count
     cell_count_value.font = Font(size=14)
 
-
     cell_count_name = worksheet.cell(row=2, column=7)
     cell_count_name.value = "Популярное направление"
     cell_count_name.font = Font(name='Calibri', bold=True, size=14)
@@ -234,7 +270,6 @@ def export_to_xlsx(request):
     cell_count_value = worksheet.cell(row=3, column=8)
     cell_count_value.value = p_price
     cell_count_value.font = Font(size=14)
-
 
     for i in range(2, len(columns) + 1):
         column_letter = get_column_letter(i)
